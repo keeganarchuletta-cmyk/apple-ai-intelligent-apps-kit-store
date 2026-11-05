@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligent Apps with Apple AI | Developer Kit Store</title>
+<meta name="description" content="Complete step-by-step kit to build, ship and monetize intelligent apps on the App Store using Apple Intelligence, Foundation Models & App Intents.">
+<style>
+  :root {
+    --navy: #0a1628;
+    --blue: #1e3a5f;
+    --accent: #00c2ff;
+    --purple: #7b5cff;
+    --text: #e8f0fe;
+    --muted: #8ba3c7;
+    --card: #111d33;
+    --success: #00e676;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky; top: 0; background: rgba(10,22,40,0.92); backdrop-filter: blur(12px); z-index: 50;
+  }
+  .logo { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.1rem; }
+  .logo-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--accent), var(--purple)); border-radius: 8px; display: grid; place-items: center; font-size: 14px; }
+  nav { display: flex; gap: 1.5rem; font-size: 0.9rem; color: var(--muted); }
+  nav a:hover { color: white; }
+  .cart-btn { background: var(--blue); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 999px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; }
+  .cart-btn:hover { background: #254a75; }
+  .hero {
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; padding: 3rem 2rem 4rem; max-width: 1200px; margin: 0 auto; align-items: center;
+  }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } nav { display: none; } }
+  .badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(0,194,255,0.12); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 1rem; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+  h1 span { background: linear-gradient(90deg, var(--accent), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { color: var(--muted); font-size: 1.15rem; max-width: 32rem; margin-bottom: 1.8rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 2rem; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), #0088cc); color: #001018; font-weight: 700; padding: 0.9rem 1.6rem; border-radius: 12px; border: none; cursor: pointer; font-size: 1rem;
+    box-shadow: 0 8px 24px rgba(0,194,255,0.35); transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,194,255,0.45); }
+  .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 0.9rem 1.4rem; border-radius: 12px; font-weight: 600; cursor: pointer; }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .trust { display: flex; flex-wrap: wrap; gap: 1.2rem; font-size: 0.8rem; color: var(--muted); }
+  .trust span { display: flex; align-items: center; gap: 0.35rem; }
+  .product-card {
+    background: var(--card); border-radius: 24px; padding: 1.5rem; border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .product-img {
+    width: 100%; aspect-ratio: 1; border-radius: 16px; background: linear-gradient(145deg, #0d1b2e, #1a2f4d);
+    display: grid; place-items: center; margin-bottom: 1.2rem; position: relative; overflow: hidden;
+  }
+  .product-img .mock {
+    width: 70%; height: 80%; background: linear-gradient(160deg, #0a1a2f, #152a48); border-radius: 12px; border: 2px solid rgba(0,194,255,0.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; padding: 1rem; text-align: center;
+  }
+  .product-img .mock .brain { font-size: 2.5rem; }
+  .price-row { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.8rem; }
+  .price { font-size: 2rem; font-weight: 800; }
+  .old-price { color: var(--muted); text-decoration: line-through; font-size: 1.1rem; }
+  .tag { background: rgba(0,230,118,0.15); color: var(--success); font-size: 0.7rem; padding: 0.2rem 0.5rem; border-radius: 6px; font-weight: 700; }
+  .features-mini { list-style: none; margin: 1rem 0; font-size: 0.9rem; color: var(--muted); }
+  .features-mini li { padding: 0.3rem 0; display: flex; gap: 0.5rem; }
+  .features-mini li::before { content: "✓"; color: var(--success); font-weight: bold; }
+  section { padding: 3rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center; }
+  .section-sub { color: var(--muted); text-align: center; margin-bottom: 2.5rem; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+  .step {
+    background: var(--card); border-radius: 16px; padding: 1.4rem; border: 1px solid rgba(255,255,255,0.06);
+  }
+  .step-num { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--purple)); border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: 0.9rem; margin-bottom: 0.8rem; color: #001018; }
+  .step h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .step p { font-size: 0.85rem; color: var(--muted); }
+  .chat-widget {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; width: 360px; max-width: calc(100vw - 2rem);
+    background: var(--card); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; z-index: 100;
+    transform: translateY(20px); opacity: 0; pointer-events: none; transition: all 0.3s;
+  }
+  .chat-widget.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .chat-header {
+    background: linear-gradient(90deg, #0d1b2e, #1a2f4d); padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between;
+  }
+  .chat-header h4 { font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; }
+  .chat-header button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.2rem; }
+  .chat-messages { height: 280px; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .msg { max-width: 85%; padding: 0.7rem 1rem; border-radius: 14px; font-size: 0.88rem; }
+  .msg.bot { background: rgba(255,255,255,0.06); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .msg.user { background: linear-gradient(135deg, var(--accent), #0088cc); color: #001018; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+  .chat-input-row { display: flex; padding: 0.8rem; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.08); }
+  .chat-input-row input {
+    flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+    padding: 0.7rem 1rem; color: white; font-size: 0.9rem; outline: none;
+  }
+  .chat-input-row input:focus { border-color: var(--accent); }
+  .chat-input-row button { background: var(--accent); border: none; color: #001018; width: 42px; height: 42px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+  .chat-toggle {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--purple)); border: none; color: #001018; font-size: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0,194,255,0.4); cursor: pointer; z-index: 99; display: grid; place-items: center;
+  }
+  .chat-toggle.hidden { display: none; }
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 200;
+  }
+  .modal.open { display: flex; }
+  .modal-box {
+    background: var(--card); border-radius: 20px; padding: 2rem; max-width: 420px; width: 90%; text-align: center; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .modal-box h3 { margin-bottom: 0.5rem; }
+  .modal-box p { color: var(--muted); margin-bottom: 1.5rem; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><div class="logo-icon">A</div> Intelligent Apps</div>
+  <nav>
+    <a href="#kit">Kit Overview</a>
+    <a href="#steps">What You'll Build</a>
+    <a href="#ai">AI Features</a>
+  </nav>
+  <button class="cart-btn" onclick="openCart()">🛒 Cart <span id="cart-count">0</span></button>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="badge">✦ DEVELOPER KIT · APPLE INTELLIGENCE</div>
+    <h1>Build Intelligent Apps<br>with <span>Apple AI</span></h1>
+    <p class="subtitle">The complete step-by-step developer kit. From Foundation Models & App Intents to TestFlight and App Store monetization. Ship smarter apps that reach millions.</p>
+    <div class="cta-row">
+      <button class="btn-primary" onclick="addToCart()">Get the Kit — $47</button>
+      <button class="btn-secondary" onclick="document.getElementById('steps').scrollIntoView({behavior:'smooth'})">View 5 Steps →</button>
+    </div>
+    <div class="trust">
+      <span>🛡 Built for Apple Platforms</span>
+      <span>🍎 Official Best Practices</span>
+      <span>🔒 On-Device AI Ready</span>
+      <span>📈 Proven Path to Revenue</span>
+    </div>
+  </div>
+  <div class="product-card">
+    <div class="product-img">
+      <div class="mock">
+        <div class="brain">🧠</div>
+        <strong style="font-size:1.1rem">Apple AI<br>Intelligent Apps Kit</strong>
+        <span style="font-size:0.75rem;color:var(--muted)">Foundation Models · App Intents · Xcode</span>
+        <div style="margin-top:0.5rem;font-size:0.7rem;background:rgba(0,0,0,0.4);padding:0.3rem 0.6rem;border-radius:6px;">Download on the App Store path</div>
+      </div>
+    </div>
+    <div class="price-row">
+      <span class="price">$47</span>
+      <span class="old-price">$97</span>
+      <span class="tag">LAUNCH OFFER</span>
+    </div>
+    <ul class="features-mini">
+      <li>Full step-by-step PDF + video walkthroughs</li>
+      <li>App Intents & Siri AI integration templates</li>
+      <li>Xcode project starter + Foundation Models samples</li>
+      <li>TestFlight & App Store submission checklist</li>
+      <li>Monetization & product page assets</li>
+    </ul>
+    <button class="btn-primary" style="width:100%" onclick="addToCart()">Add to Cart</button>
+  </div>
+</section>
+
+<section id="steps">
+  <h2 class="section-title">From Preparation to Profit</h2>
+  <p class="section-sub">Everything you need in 5 clear steps — exactly as outlined in the official Apple developer flow.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Get Ready</h3>
+      <p>Explore Apple Intelligence features and the Foundation Models framework + latest SDKs on the developer portal.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Implement App Intents</h3>
+      <p>Map your app’s actions and content so Siri AI can use natural language and voice interactions.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Build & Integrate</h3>
+      <p>Use Xcode and current SDKs to create a unique experience powered by the new intelligent features.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Test & Refine</h3>
+      <p>Leverage Developer Labs and TestFlight for high-quality, reliable performance and smooth UX.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <h3>Submit & Monetize</h3>
+      <p>Prepare product page assets, submit to the App Store, reach a global audience and start earning.</p>
+    </div>
+  </div>
+</section>
+
+<section id="kit" style="background:rgba(0,0,0,0.25); border-radius:24px; margin: 0 1rem 3rem;">
+  <h2 class="section-title">What’s Inside the Kit</h2>
+  <p class="section-sub">Ready-to-use resources so you can ship faster.</p>
+  <div class="steps">
+    <div class="step"><h3>📘 Complete Guide</h3><p>Detailed written walkthrough matching the official Apple flow from prep to profit.</p></div>
+    <div class="step"><h3>💻 Code Templates</h3><p>App Intents samples, Foundation Models wrappers, and Xcode starter projects.</p></div>
+    <div class="step"><h3>✅ Checklists</h3><p>TestFlight, App Review, and monetization checklists so nothing is missed.</p></div>
+    <div class="step"><h3>🎨 Assets</h3><p>Product page copy, screenshot templates, and App Store visual guidelines.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>Intelligent Apps with Apple AI · Demo storefront · Ready for Shopify / Stripe connection</p>
+  <p style="margin-top:0.5rem">This is a live demo product page. Connect your Shopify store or Stripe Buy Button to go fully live & monetize.</p>
+</footer>
+
+<!-- Chat Widget -->
+<button class="chat-toggle" id="chatToggle" onclick="toggleChat()">💬</button>
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-header">
+    <h4>🤖 ChatGPT-style Assistant</h4>
+    <button onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">Hi! I'm your AI product assistant connected to knowledge about the Apple AI Intelligent Apps Kit. Ask me anything about the 5 steps, App Intents, Foundation Models, pricing, or how to deploy.</div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ask about the kit..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()">→</button>
+  </div>
+</div>
+
+<!-- Cart Modal -->
+<div class="modal" id="cartModal">
+  <div class="modal-box">
+    <h3>🎉 Added to Cart!</h3>
+    <p id="modalText">Apple AI Intelligent Apps Kit is ready. This is a demo. To go live: connect Shopify Buy Button, Stripe, or Gumroad and replace the add-to-cart handler.</p>
+    <button class="btn-primary" onclick="closeCart()">Got it — Continue</button>
+  </div>
+</div>
+
+<script>
+  let cartCount = 0;
+  const knowledge = {
+    "price": "The launch price is $47 (normally $97). It includes the full PDF guide, code templates, checklists and assets.",
+    "steps": "There are 5 steps: 1) Get Ready with Foundation Models & SDKs, 2) Implement App Intents for Siri, 3) Build & Integrate in Xcode, 4) Test & Refine with Labs + TestFlight, 5) Submit & Monetize on the App Store.",
+    "app intents": "App Intents let you map your app's actions and content so Siri AI can trigger them with natural language and voice. The kit includes ready templates.",
+    "foundation": "Foundation Models is Apple's on-device AI framework. The kit shows how to explore it via the developer portal and integrate the latest SDKs.",
+    "testflight": "Use Developer Labs and TestFlight to rigorously evaluate performance, reliability, Siri integration and UX before App Store submission.",
+    "monetize": "After submission you reach a global audience. The kit covers product page assets and monetization strategies so you can start generating revenue.",
+    "shopify": "This page is a ready storefront mock. To connect real Shopify: create a product, generate a Buy Button or use the Shopify Storefront API, then replace the addToCart function with the real checkout.",
+    "chatgpt": "The chat widget here is a simulated ChatGPT-style assistant with product knowledge. For real OpenAI connection, add your API key and call the Chat Completions endpoint from a serverless function (Vercel/Netlify).",
+    "default": "I can help with pricing, the 5 steps (Get Ready → App Intents → Build → Test → Submit & Monetize), App Intents, Foundation Models, TestFlight, or how to connect this to real Shopify/Stripe. What would you like to know?"
+  };
+
+  function addToCart() {
+    cartCount++;
+    document.getElementById('cart-count').textContent = cartCount;
+    document.getElementById('modalText').textContent = `Apple AI Intelligent Apps Kit ×${cartCount} added. Demo mode. Connect Shopify or Stripe to process real payments and deliver the digital product.`;
+    document.getElementById('cartModal').classList.add('open');
+  }
+  function openCart() {
+    if (cartCount === 0) {
+      document.getElementById('modalText').textContent = "Your cart is empty. Grab the kit to start building intelligent Apple apps!";
+    }
+    document.getElementById('cartModal').classList.add('open');
+  }
+  function closeCart() { document.getElementById('cartModal').classList.remove('open'); }
+
+  function toggleChat() {
+    const w = document.getElementById('chatWidget');
+    const t = document.getElementById('chatToggle');
+    w.classList.toggle('open');
+    t.classList.toggle('hidden');
+  }
+
+  function sendChat() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    const msgs = document.getElementById('chatMessages');
+    msgs.innerHTML += `<div class="msg user">${escapeHtml(text)}</div>`;
+    input.value = '';
+    msgs.scrollTop = msgs.scrollHeight;
+
+    setTimeout(() => {
+      const lower = text.toLowerCase();
+      let reply = knowledge.default;
+      for (const [k, v] of Object.entries(knowledge)) {
+        if (k !== 'default' && lower.includes(k)) { reply = v; break; }
+      }
+      if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) reply = "Hey! Ready to build intelligent apps with Apple AI? Ask me about the kit, steps, or pricing.";
+      if (lower.includes('buy') || lower.includes('purchase') || lower.includes('order')) reply = "Click 'Get the Kit — $47' or 'Add to Cart'. This is a demo; swap the button for a real Shopify Buy Button or Stripe Checkout to take live payments.";
+      msgs.innerHTML += `<div class="msg bot">${reply}</div>`;
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 600);
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+</script>
+</body>
+</html>
